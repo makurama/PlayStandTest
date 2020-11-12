@@ -1,0 +1,288 @@
+/*________________ALL________________*/
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+/*________________HEADER________________*/
+header{
+    display: flex;
+    background: white;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    height: 90px;
+}
+
+header img{
+    width: 70px;
+    height: 70px;
+    margin: 0 10px;
+}
+
+.nav_list{
+    width: 100%;
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.nav_item{
+    margin: 0 10px;
+}
+
+.nav_list a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.nav_list button{
+    border-radius: 20px;
+    width: 95px;
+    height: auto;
+    min-height: 40px;
+    border-color: #0060FF;
+    border: solid;
+    border-width: 2px;
+    cursor: pointer;
+    color: #0060FF;
+    background: white;
+    font-size: 16px;
+}
+
+.nav_list button:hover{
+    background: #0060FF;
+    color: white;
+}
+
+#my_account, #logout_bnt{
+    display: none;
+}
+/*________________MODAL________________*/
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,0.8);
+}
+
+.modal_content{
+    background: rgba(242, 242, 242, 0.2);
+    margin: 15% auto;
+    padding: 5px;
+    border-radius: 25px;
+    width: 25%;
+    height: auto;
+    text-align: center; /*мб удалить*/
+}
+
+#user_registration{
+    color: white;
+    font-size: 18px;
+}
+/*
+.close_modal{
+    line-height: 15px;
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+*/
+/*________________MODAL_FORM________________*/
+.modal_content input[type="text"], input[type="password"]{
+    width: 50%;
+    height: 50px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.dws_button{
+    border-radius: 15px;
+    width: 95px;
+    height: auto;
+    min-height: 40px;
+    border-color: white;
+    border: solid;
+    border-width: 2px;
+    cursor: pointer;
+    color: white;
+    background: rgba(242, 242, 242, 0);
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.modal_content img{
+    width: 120px;
+    height: 120px;
+    margin: -60px 0 30px 0;
+    border: 5px solid white;
+    border-radius: 50%;
+    background: white;
+}
+
+#send_reg{
+    display: none;
+}
+
+#error_message{
+    display: none;
+    border-radius: 5px;
+    color: red;
+    font-size: 18px;
+    background: rgba(242, 242, 242, 0.5);
+}
+/*________________MAIN________________*/
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f7f7f7;
+}
+/*________________SLIDER________________*/
+.slide_container{
+    width: 100%;
+    position: relative;
+}
+
+.prev, .next{
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+.next{
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+/*________________CONTAINER________________*/
+.container{
+    margin: 100px 0;
+    width: 95%;
+    background: white;
+    box-shadow: 0px 0px 15px -5px #f2f2f2;
+    height: auto;
+}
+
+.search_items{
+    display: flex;
+    justify-content:flex-end;
+    background: #f7f7f7;
+}
+
+.search_items input[type="button"], input[type="date"], input[type="text"]{
+    height: 30px;
+    font-size: 15px;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: 2px solid grey;
+}
+.search_items input[type="date"]{
+    cursor: pointer;
+}
+.search_items p{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+.search_items input[type="text"]:hover{
+    background: #f2f2f2;
+    border: 2px solid black;
+}
+.search_items input[type="button"]{
+    background: white;
+    width: 70px;
+    height: auto;
+    min-height: 34px;
+    cursor: pointer;
+    margin: 0 0 0 10px;
+}
+
+.search_items input[type="button"]:hover, input[type="date"]:hover{
+    background: #f2f2f2;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+.lead{
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+#lead_more{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    font-size: 20px;
+    display: none;
+}
+
+#lead_more:hover{
+    text-decoration: underline;
+}
+
+.user_news a{
+    text-decoration: none;
+}
+/*________________FOOTER________________*/
+.different_info{
+    display: flex;
+    justify-content: space-between; /*на араунд*/
+}
+.useless_info{
+    width: 50%; /*удалить*/
+    font-size: 20px;
+    margin: 0 15px;
+}
+
+.contact_info{
+    width: 50%; /*удалить*/
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    text-align: end;
+    margin: 0 20px;
+}
+
+.contact_img{
+    width: 100%;
+}
+
+.contact_img img{
+    width: 30px;
+    height: auto;
+    min-height: 30px;
+}
+
+.contact_img a{
+    margin: 0 15px;
+}
+
+.useless_info img{
+    width: 70px;
+    height: auto;
+    min-height: 70px;
+}

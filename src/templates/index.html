@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type= "text/css" href="{{url_for('static',filename='css/main.css')}}">
+    <title>TestPlayStand</title>
+</head>
+<body>
+    <header>
+        <img src="{{url_for('static', filename='image/news.png')}}" alt="news">
+        <nav>
+            <ul class="nav_list">
+                <li class="nav_item"><a href="http://127.0.0.1:5000/account" id="my_account">My account</a></li>
+                <li class="nav_item"><a id="contact_data" href="#contact_us">Contact us</a></li>
+                <li class="nav_item"><button id="logout_bnt">Logout</button></li>
+                <li class="nav_item"><button id="modal_sign">Sign in</button></li>
+                <div id="login_modal" class="modal">
+                    <div class="modal_content">
+                        <span class="close_modal"></span>
+                        <img src="{{url_for('static', filename='image/news.png')}}" alt="news">
+                        <form>
+                            <div>
+                                <input id="send_log" type="text" name="username" placeholder="Email">
+                            </div> <!--мб вернхнемум и нижнему класс добавить и по нему данные с них вытаскивать из полей ввода-->
+                            <div>
+                                <input id="send_pass" type="password" name="password" placeholder="Password">
+                            </div>
+                            <div>
+                                <input id="send_auth" class="dws_button" type="button" name="submit" value="Войти">
+                                <input id="send_reg" class="dws_button" type="button" name="submit" value="Регистрация">
+                            </div>
+                            <p id="error_message"></p>
+                            <a id="user_registration" href="#">Еще не зарегистрированы?</a>
+                        </form>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="slide_container">
+            <div class="slide">
+                <img src="{{url_for('static', filename='image/1.jpg')}}" alt="news" style="width: 100%;">
+            </div>
+            
+            <div class="slidecontainer">
+                <div class="slide">
+                    <img src="{{url_for('static', filename='image/2.jpg')}}" alt="news" style="width: 100%;">
+                </div>
+            </div>
+
+            <div class="slidecontainer">
+                <div class="slide">
+                    <img src="{{url_for('static', filename='image/3.jpg')}}" alt="news" style="width: 100%;">
+                </div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094</a>
+            <a class="next" onclick="plusSlides(1)">&#10095</a>
+        </div>
+        <div class="container">
+            <form class="search_items">
+                <p>С</p>
+                <input type="date" id="first_date" name="firstdate">
+                <p>по</p>
+                <input type="date" id="second_date" name="seconddate">
+                <input type="text" id="search_news" name="searchnews" placeholder="Поиск по словам">
+                <input type="button" value="Поиск" id="search">
+            </form>
+            <div class="user_news">
+            </div>
+            <div id="top_news" class="lead">
+                <a href="#top_news" onclick="return false" id="lead_more">Lead more</a>
+            </div>
+        </div>
+    </main>
+    
+
+    <footer>
+        <div id="contact_us" class="different_info">
+            <div class="useless_info">
+                <img src="{{url_for('static', filename='image/news.png')}}" alt="News logo">
+                <p>Новостной портал</p>
+            </div>
+            <div class="contact_info">
+                <p>Также читайте нас в:</p>
+                <div class="contact_img">
+                    <a class="contact" href="#"><img src="{{url_for('static', filename='image/facebook.png')}}"></a>
+                    <a class="contact" href="#"><img src="{{url_for('static', filename='image/instagram.png')}}"></a>
+                    <a class="contact" href="#"><img src="{{url_for('static', filename='image/vk.png')}}"></a>
+                </div>
+                <p>Данные для связи:</p>
+                <p>+7 (999) 999-99-99</p>
+                <p>email@mail.ru</p>
+            </div>
+        </div>
+        <p style="text-align: center; font-size: 15px;">Все права защищены и блаблабла</p>
+    </footer> 
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+</body>
+</html>

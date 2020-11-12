@@ -1,0 +1,54 @@
+<html>
+  <head>
+      <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='css/account.css')}}">
+      <title>Account</title>
+  </head>
+  <body>
+      <header>
+        <img src="{{url_for('static', filename='image/news.png')}}" alt="news">
+        <nav>
+            <ul class="nav_list">
+                <li class="nav_item"><a href=" http://127.0.0.1:5000" id="my_account">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% if user=="admin" %}
+        <div class="container">
+            <p>Действия пользователей</p>
+            <div class="user_logs">
+                <p>Логи</p>
+                <p>Логи</p>
+                <p>Логи</p>
+                <p>Логи</p>
+                <p>Логи</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="container">
+            <p>Пока что тут пусто...</p>
+        </div>
+        {% endif %}
+    </main>
+      <footer>
+        <div id="contact_us" class="different_info">
+            <div class="useless_info">
+                <img src="{{url_for('static', filename='image/news.png')}}" alt="News logo">
+                <p>Новостной портал</p>
+            </div>
+            <div class="contact_info">
+                <p>Также читайте нас в:</p>
+                <div class="contact_img">
+                    <a href="#"><img src="{{url_for('static', filename='image/facebook.png')}}"></a>
+                    <a href="#"><img src="{{url_for('static', filename='image/instagram.png')}}"></a>
+                    <a href="#"><img src="{{url_for('static', filename='image/vk.png')}}"></a>
+                </div>
+                <p>Данные для связи:</p>
+                <p>+7 (999) 999-99-99</p>
+                <p>email@mail.ru</p>
+            </div>
+        </div>
+        <p style="text-align: center; font-size: 15px;">Все права защищены и блаблабла</p>
+    </footer>
+  </body>
+</html>
