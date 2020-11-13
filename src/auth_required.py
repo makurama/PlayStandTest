@@ -1,16 +1,11 @@
 from functools import wraps
-from flask import session, request
-from flask.sessions import SecureCookieSession
-
+from flask import session
 from models import UserModel
 from database import db
-import jwt
 
 def auth_required(view_func):
     """
-    decorator to check if the user is authorized
-    :param view_func: view func
-    :return: all that was accepted
+    Декоратор проверки сессии юзера, а также проверки его на поддельную сессию (поиск юзера с таким же ид в бд)
     """
     @wraps(view_func)
     def wrapper(*args, **kwargs):

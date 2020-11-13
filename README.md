@@ -7,10 +7,7 @@ set FLASK_APP=app:create_app
 set FLASK_ENV=development
 flask run
 ~~~~
-**Структура проекта**
 
-Будет позже
 
 **Премененные окружения**
 * SECRET_KEY
-* DB_CONNECTION

@@ -21,7 +21,6 @@ def create_app():
     app.config.from_object('config.Config')
     Session(app)
     CORS(app)
-    #app.permanent_session_lifetime = datetime.timedelta(days=1)
     app.register_blueprint(bp_user, url_prefix='/user')
     app.register_blueprint(bp_auth, url_prefix='/auth')
     app.register_blueprint(bp_news, url_prefix='/news')
