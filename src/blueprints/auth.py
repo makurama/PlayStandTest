@@ -1,9 +1,3 @@
-"""
-This module makes it possible to authorize and deauthorization a user
-:classes:
-UserLogin - user authorization
-UserLogout - user deauthorization
-"""
 import scheme.auth
 from flask import (
     Blueprint,
@@ -22,13 +16,9 @@ bp = Blueprint('auth', __name__)
 
 class UserLogin(MethodView):
     """
-    this class holds authorization user
+    Авторизация
     """
     def post(self):
-        """
-        accepts user data and authorizes him
-        :return: answer and status
-        """
         request_json = request.json
 
         try:
@@ -43,21 +33,16 @@ class UserLogin(MethodView):
             return user_er.message, 404
         session['user_id'] = auth_user
         session.modified = True
-        print(session['user_id'])
 
         return jsonify({'answer': 'Вы вошли в аккаунт'}), 200
 
 
 class UserLogout(MethodView):
     """
-    this class holds deauthorization user
+    Выход из аккаунта
     """
     def post(self):
-        """
-        deauthorization user
-        :return: answer and status
-        """
-        session.pop('user_id', None)
+        session.pop('user_id', None) #также как в индексе просто убиваем сессию
         return {"answer": "Выход из аккаунта произведен"}, 200
 
 

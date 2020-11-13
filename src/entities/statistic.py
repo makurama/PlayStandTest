@@ -11,5 +11,4 @@ class Statistic:
     """
     start_date: Optional[str]
     finish_date: Optional[str]
-    page: int
     ready_date: [str]

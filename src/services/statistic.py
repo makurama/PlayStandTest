@@ -1,11 +1,6 @@
 from models import StatisticsModel
-from flask import jsonify, request, Blueprint
-from sqlalchemy import func, and_, between
-from datetime import datetime
+from sqlalchemy import and_, between
 from exception import ServiceError
-from typing import List
-import pars_newsru
-import pars_chelru
 import time
 
 
@@ -14,23 +9,21 @@ class IncorrectData(ServiceError):
 
 
 class StatisticService:
-    """
-    сlass implements business logic get methods
-    """
     def __init__(self, session):
-        """
-        class constructor
-        :param session: connect to db
-        :param user_id: user id in session
-        """
         self.session = session
 
     def save_event(self, events, user_id):
-        for event in (events.get('events')):
+        for event in (events.get('event')):
             unix_date = (int(time.mktime(time.strptime(event.get('datetime'), '%d-%m-%Y %H:%M:%S'))))
-            new_event = StatisticsModel(user_id=user_id, datetime=unix_date, action=event.get('action'))
-            self.session.add(new_event)
-            self.session.commit()
+            old_event = (self.session.query(StatisticsModel)
+                         .filter(and_(StatisticsModel.user_id == user_id,
+                                      StatisticsModel.datetime == unix_date,
+                                      StatisticsModel.action == event.get('action'))).first())
+
+            if old_event is None:
+                new_event = StatisticsModel(user_id=user_id, datetime=unix_date, action=event.get('action'))
+                self.session.add(new_event)
+                self.session.commit()
 
     def get_event(self, statistic):
         if statistic.start_date is None and statistic.finish_date is None and statistic.ready_date is None:
