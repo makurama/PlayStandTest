@@ -1,15 +1,10 @@
 from models import UserModel
-from flask import jsonify, request, Blueprint
-from sqlalchemy import func, and_, between
-from datetime import datetime
-from exception import ServiceError
-from typing import List
-import pars_newsru
-import pars_chelru
-import time
 
 
 class AccountService:
+    """
+    Тут просто отдаем подготовленный шаблон аккаунта
+    """
     def __init__(self, session):
         self.session = session
 

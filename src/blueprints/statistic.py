@@ -6,20 +6,18 @@ from services.statistic import StatisticService, IncorrectData
 from scheme.statistic import statistic_scheme
 from flask_cors import cross_origin
 from auth_required import auth_required
-from services.auth import AuthService, NotExistToken
-import jwt
+
 bp = Blueprint('statistic', __name__)
 
 
 class NewsView(MethodView):
     """
-    class for registering and gets a user
+    Статистика
     """
     @cross_origin(supports_credentials=True)
     @auth_required
     def post(self, user_id):
         request_json = request.json
-
         service = StatisticService(db.connection)
         service.save_event(request_json, user_id)
 

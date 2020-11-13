@@ -42,7 +42,3 @@ def parse(url):
     html = get_html(url, HEADER)
     if html.status_code == 200:
         return get_content(html.text, url)
-    else:
-        print('Error') # тут добавить в бд 4 ерор во все поля, и потом проверкой их убирать если что
-
-# print(parse(url, HEADER)) #вместо сделать вызов из  другого файла откуда скрипт для пополнения бд будет запускаться и в бэкенде

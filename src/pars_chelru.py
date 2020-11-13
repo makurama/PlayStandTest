@@ -18,9 +18,9 @@ def get_count_pages(html):
 
 def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
-    h = soup.find_all(name='h2', class_='M5bt')
-    p = soup.find_all(name='p', class_='M5ab-')
-    time = soup.find_all(name='time', class_='NDkz')
+    h = soup.find_all(name='h2', class_='NBbt')
+    p = soup.find_all(name='p', class_='NBaa1')
+    time = soup.find_all(name='time', class_='NLlj')
 
     times = []
     for item in time:
@@ -59,6 +59,3 @@ def parse(url):
             html = get_html(url+f'&page={page}', header=HEADERS)
             news.extend(get_content(html.text))
         return news
-
-    else:
-        print('Error') # тут добавить в бд 4 ерор во все поля, и потом проверкой их убирать если что

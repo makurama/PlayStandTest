@@ -1,8 +1,3 @@
-"""
-module with business logic for user registration and getting user
-:classes:
-UserService - class for registering and getting a user
-"""
 from models import UserModel
 from werkzeug.security import generate_password_hash
 from exception import ServiceError
@@ -17,29 +12,14 @@ class UserError(ServiceError):
 
 
 class ThisEmailAlreadyUse(UserError):
-    """
-    class with conflict error email
-    """
     message = {"answer": "Данный email уже используется"}
 
 
 class UserService:
-    """
-    UserService - class for registering and getting a user
-    """
     def __init__(self, session):
-        """
-        class constructor
-        :param session: connect to db
-        """
         self.session = session
 
     def create_user(self, user: UserCreate) -> BaseUser:
-        """
-        registering user
-        :param user: dataclass with data for auth user
-        :return: dataclass user
-        """
         old_user = (self.session.query(UserModel).filter
                     (UserModel.login == user.login).first())
 
@@ -54,11 +34,6 @@ class UserService:
         return self.get_user(new_user.as_dict().get('id'))
 
     def get_user(self, user_id: int) -> BaseUser:
-        """
-        getting user
-        :param user_id: id user in session
-        :return: dataclass user
-        """
         data_user = (self.session.query(UserModel).filter
                      (UserModel.id == user_id).first())
 

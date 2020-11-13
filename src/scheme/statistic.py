@@ -10,20 +10,14 @@ class StatisticScheme(BaseSchema):
     __entity_class__ = Statistic
     start_date = fields.String(missing=None)
     finish_date = fields.String(missing=None)
-    page = fields.Integer(required=True)
     ready_date = fields.String(missing=None)
 
     @validates('ready_date')
     def validate_ready_date(self, ready_date):
         access_date = ('this_day', 'this_hours')
-        if ready_date is not None:
+        if ready_date is not None and ready_date != '':
             if ready_date not in access_date:
                 raise ValidationError(f'Доступные периоды: {access_date}')
-
-    @validates('page')
-    def validate_page(self, page):
-        if page < 0:
-            raise ValidationError('page должно быть положительным числом')
 
     @validates_schema
     def validate_date(self, data, **kwargs):

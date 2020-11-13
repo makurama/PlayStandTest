@@ -13,7 +13,7 @@ bp = Blueprint('user', __name__)
 
 class UserView(MethodView):
     """
-    class for registering and gets a user
+    Создание аккаутна
     """
     def post(self):
         request_json = request.json

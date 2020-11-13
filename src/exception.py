@@ -1,6 +1,3 @@
-"""
-module contains the main exception for inheritance
-"""
 class ServiceError(Exception):
     """
     The main exception for inheritance

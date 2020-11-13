@@ -11,6 +11,7 @@ let errorMessage = document.getElementById("error_message");
 let userNews = document.getElementsByClassName("user_news")[0];
 let contactData = document.getElementById("contact_data");
 window.eventmass = []
+
 //Слайдер
 showSlides(SlideIndex);
 
@@ -19,9 +20,6 @@ btn.onclick = () => {
     eventmass.push({datetime: GetDate(), action: "modal open"})
 }
 
-//span.onclick = () => {
-//    modal.style.display = "none";
-//} //спан удалять он вроде не нужен мне
 
 window.onclick = (event) => {
     if (event.target == modal) {
@@ -90,7 +88,7 @@ sendBtn.onclick = async () => {
         body: JSON.stringify(user)
     });
 
-    let res = await response.json();/////////////////////////////////////////////////////
+    let res = await response.json();
     
     if (response.status === 400) {
         errorMessage.innerText = (res?.password?.[0] ?? '') + '\n' + (res?.login?.[0] ?? '');
@@ -116,6 +114,7 @@ sendBtn.onclick = async () => {
         }
 };
 
+//создание новостей
 let InnerNews = (respNews) => {
     let siteName = document.createElement('h3')
     let title = document.createElement('p')
@@ -125,7 +124,7 @@ let InnerNews = (respNews) => {
     siteName.innerText = respNews[item].siteName
     description.innerText = respNews[item].description
     datetime.innerText = respNews[item].datetime
-    title.innerHTML = `<a href=${respNews[item].urlNews}>${respNews[item].title}<\a>`
+    title.innerHTML = `<a href=${respNews[item].urlNews} class="site_go_url">${respNews[item].title}<\a>`
 
 
     siteName.style.cssText = `font-size: 15px; margin: 30px 0 5px 0;`
@@ -151,14 +150,13 @@ a.onclick = () => {
   
 //Регистрация                                  
 regButton.onclick = async () => {
-    //можно в целом данный момент в функцию завернуть вместе с таким же из функции выше и прокидывать в пораметры адрес сервера нужный
     let login = document.getElementById("send_log").value;
     let pass = document.getElementById("send_pass").value;
     let user = {
     login: login,
     password: pass
     };
-    //в другую функцию что ниже нужно бы вынести
+
     let response = await fetch('http://127.0.0.1:5000/user', {
         method: 'POST',
         mode: 'cors',
@@ -185,7 +183,7 @@ regButton.onclick = async () => {
         body: JSON.stringify(user)
         });
 
-        let res = await userReturn.json();/////////////////////////////////////////////////////
+        let res = await userReturn.json();
 
         modal.style.display = "none";
         btn.style.display = "none";
@@ -204,7 +202,7 @@ regButton.onclick = async () => {
 
 //выход
 logoutBtn.onclick = async () => {
-    //в другую функцию что ниже нужно бы вынести
+    send_event()
     await fetch(' http://127.0.0.1:5000/auth/logout', {
         method: 'POST',
         mode: 'cors',
@@ -216,20 +214,14 @@ logoutBtn.onclick = async () => {
     account.style.display = "none";
     logoutBtn.style.display = "none";
     userNews.innerHTML = ""
-    eventmass.push({datetime: GetDate(), action: "logout"})
-    //тут сделать отправку наверное
 }
 
 
 //Learn more
 let leadMore = document.getElementById("lead_more");
-var counter = 1; //т.к. с 0 гет запрос выше, он при нажатии на "ПОИСК"
+var counter = 1;
 leadMore.onclick = async () => {
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //2 вара на время, завтра решить проблему с ними, они есть и в функции выше
-//    let secondDate = document.getElementById("second_date").value;
-//    let firstDate = document.getElementById("first_date").value;
-                                        
+
                         
     let response = await fetch(`http://127.0.0.1:5000/news?counter_news=${counter}&start_date=${window.firstDate}&finish_date=${ window.secondDate}&key_word=${window.searchNews}`);
     counter += 1;
@@ -270,6 +262,19 @@ for (let i = 0; i < contact_url.length; i++) {
     eventmass.push({datetime: GetDate(), action: "social networks"})
   };
 }
+//site url
+function on(node, event, className, cb) {
+	addEventListener(event, (e) => {
+  	if (!e.target.classList.contains(className)) {
+    	return false
+    }
+    cb(e)
+  })
+}
+on(userNews, 'click', 'site_go_url', e => {
+  eventmass.push({datetime: GetDate(), action: "go news site"})
+})
+
 
 //Поиск
 let getNews = document.getElementById("search");
@@ -278,15 +283,12 @@ getNews.onclick = async () => {
     window.firstDate = document.getElementById("first_date").value;
     window.secondDate = document.getElementById("second_date").value;
     window.searchNews = document.getElementById("search_news").value;
-    console.log(eventmass)
     
     checkInputSearch(firstDate, secondDate, searchNews)
 
     let response = await fetch(`http://127.0.0.1:5000/news?counter_news=0&start_date=${firstDate}&finish_date=${secondDate}&key_word=${searchNews}`);
-    console.log(response)
     let res = await response.json();
-    console.log(res)
-    //console.log(res)
+
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
         userNews.innerHTML = ""
         leadMore.style.display = "inline";
@@ -297,21 +299,22 @@ getNews.onclick = async () => {
         alert(res.answer ?? res._schema)
     };
     eventmass.push({datetime: GetDate(), action: "search news"})
-    // в этой функции сделать получение первой страницы чего либо, в lead more сделать дальнейшие получения, данные из функции в глобальные вынести тогда наверное т.е. var
 };
-//еще есть это onbeforeunload  onunload
-let rrrr = document.getElementById("dddddd")
-rrrr.onclick = async () => {
-    let event = {
-        events: eventmass
-    };
-    //в другую функцию что ниже нужно бы вынести
-    let response = await fetch('http://127.0.0.1:5000/statistic', {
+
+
+let send_event = () => {
+    let events = {event: eventmass}
+    fetch('http://127.0.0.1:5000/statistic', {
     method: 'POST',
     mode: 'cors',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
     },
-    body: JSON.stringify(event)
+    body: JSON.stringify(events)
     });
 }
+
+onbeforeunload = function() {
+    send_event()
+    return ''
+};
